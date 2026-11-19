@@ -3,13 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <%= title %>
-    </title>
+    <title></title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h1><%= title %></h1>
-    Hello EJS!
+    <h1>Parkohelyek listaja</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>rendszam</th>
+                <th>tulajdonos</th>
+                <th>idotartam</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% parkolohelyek.forEach(parkolohely => { %>
+                 <% if (!parkolohely.fizetve) { %>
+                    <tr style="color: red; font-weight: bold;">
+                <% }else{ %>
+                    <tr>
+                <% } %>
+                    <td><%= parkolohely.id %> </td>
+                    <td><%= parkolohely.rendszam %> </td>
+                    <td><%= parkolohely.tulajdonos %> </td>
+                    <td><%= parkolohely.idotartam %> </td>
+                </tr>
+            <% }); %> 
+        </tbody>
+    </table>
+    
+    <form method="POST">
+        <label>
+            Rendszam: <br>
+            <input type="text" name="rendszam">
+        </label>
+        <br>
+        <label>
+            Tulajdonos: <br>
+            <input type="text" name="tulajdonos">
+        </label>
+        <br>
+        <label>
+            Idotartam: <br>
+            <input type="number" name="idotartam">
+        </label>
+        <br>
+        <label>
+            Fizetve: <br>
+            <input type="checkbox" name="fizetve">
+        </label>
+        <br>
+        <button type="submit">Felvetel</button>
+    </form>
+    <% errors.forEach(error => { %>
+        <p><%= error %> </p>
+    <% }); %> 
 </body>
 </html>
